@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #box {
+
+            width: 420px;
+            height: 40px;
+            margin: 0 auto;
+
+        }
+
+        #txt {
+            width: 350px;
+        }
+
+        #logo {
+            width: 360px;
+            height: 110px;
+            margin: 0 auto 5px;
+            /* position: absolute; */
+
+        }
+
+        #logo:hover {
+            box-shadow: 2px 4px 6px #ccc;
+
+        }
+
+        body {
+            position: relative;
+        }
+
+
+        #content {
+            width: 500px;
+            height: 400px;
+            margin: auto;
+            /* background-color: pink;
+            position: relative; */
+            position: absolute;
+            left: 50%;
+            /* top: 50%; */
+
+            margin: 200px 0 0 -250px;
+        }
+        p {
+            margin: 0;
+            padding: 0;
+            cursor: pointer;
+            margin-top: 5px;
+            margin-left: 5px;
+        }
+        p:hover {
+            background-color: #fff;
+            color: #cfcfcf;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="content" id="content">
+        <div class="logo" id="logo">
+            <img src="images/logo2.png" alt="">
+        </div>
+        <div id="box" class="box">
+            <input type="text" id="txt">
+            <input type="button" value="Serach" id="btn">
+        </div>
+    </div>
+</body>
+<script src="common.js"></script>
+<script>
+    var keyWords = ["春江潮水连海平", "春江花朝秋月夜", "秋水共长天一夜", "秋水广场", "专四核心词汇教程", "专攻", "无挂碍故，无有恐怖，远离颠倒梦想", "无声无色亦无形"];
+    //注册键盘抬起事件
+    my$("txt").onkeyup = function () {
+       
+       if(my$("dv")){
+           my$("box").removeChild(my$("dv"));
+       }
+       
+        var text = this.value;
+        //定义一个临时数组
+        var tempArr = [];
+        //遍历数组查找与输入内容相关的元素
+        for (var i = 0; i < keyWords.length; i++) {
+            //判断是否是最开始出现的字符 indexOf()
+            if (keyWords[i].indexOf(text) == 0) {
+                //追加到临时数组
+                tempArr.push(keyWords[i]);
+            }
+        }
+        //如果文本框是空，临时数组是空的，则不用创建div
+        if(this.value.length==0||tempArr.length==0){
+            if(my$("dv")){
+                my$("box").removeChild(my$("dv"));
+            }
+            return;
+            //防止下边代码再次创建该div
+        }
+        //遍历临时数组，创建DIV，并把div加入大到id为box的div中
+        var dvObj = document.createElement("div");
+        my$("box").appendChild(dvObj);
+        dvObj.id="dv";
+        dvObj.style.width="350px";
+        // dvObj.style.height="100px";
+        //此处不需要高
+        dvObj.style.border="1px solid pink";
+        //循环遍历临时数组，创建对应的p标签
+        for(var i=0;i<tempArr.length;i++){
+            //创建P标签
+            var pObj=document.createElement("p");
+            dvObj.appendChild(pObj);
+            setInnerText(pObj,tempArr[i]);
+
+        }
+    }
+    //获得文本框输入内容
+    //遍历数组找到以输入内容开头的元素存入临时数组
+    //
+</script>
+
+</html>
